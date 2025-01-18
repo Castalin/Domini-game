@@ -1,8 +1,16 @@
-#include <iostream>
-
+#include "game.h"
 
 int main()
 {
-    std :: cout << "Hello World!" << std :: endl;
+
+    Game game;
+
+    while (!game.isEnded())
+    {
+        game.handleInput();
+        game.update();
+        game.render();
+    }
+
     return 0;
 }
