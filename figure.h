@@ -2,6 +2,8 @@
 #define FIGURE_H
 
 #include <SFML/Graphics/Sprite.hpp>
+#include "abstarct/i_checkcell.h"
+#include "cmath"
 
 enum class Colors
 {
@@ -10,19 +12,20 @@ enum class Colors
 };
 
 
-class Figure : public sf :: Sprite
+class Figure : public sf :: Sprite, public I_checkCell
 {
 public:
     Figure(Colors color);
-    void setIndexes(const int &x, const int &y);
 
+    bool checkCell(const sf::Vector2i &newIndexes) override;
+
+    void setIndexes(const sf::Vector2i &newIndexes);
     int getindexX() const;
-
     int getindexY() const;
+    const sf :: Vector2i& getIndexes() const;
 
 private:
-    int m_indexX;
-    int m_indexY;
+    sf :: Vector2i m_indexes;
     const Colors m_color;
 
 };

@@ -27,7 +27,15 @@ void Sprite::centrelizeOrigin()
 {
     if (m_valid == true)
     {
-        this->setOrigin(m_sfTexture.getSize().x / 2, m_sfTexture.getSize().y / 2);
+        setOrigin(getPosition().x + m_sfTexture.getSize().x / 2, getPosition().y + m_sfTexture.getSize().y / 2);
+    }
+}
+
+void Sprite::decentrelizeOrigin()
+{
+    if (m_valid == true)
+    {
+        setOrigin(getPosition().x - m_sfTexture.getSize().x / 2, getPosition().y - m_sfTexture.getSize().y / 2);
     }
 }
 

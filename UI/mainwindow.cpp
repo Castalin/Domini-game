@@ -1,11 +1,16 @@
 #include "mainwindow.h"
 
-MainWindow::MainWindow()
+MainWindow::MainWindow(UIBoard *UIboard, WinConstants &winConst)
+    :m_UIboard(UIboard)
 {
-    WinConstants init;
-    m_windowSize = {init.WIDTH, init.HEIGHT};
-    m_window.create(sf :: VideoMode(init.WIDTH, init.HEIGHT), init.TITLE, sf :: Style :: Titlebar | sf::Style::Close);
-    m_window.setFramerateLimit(init.FRAMERATE);
+    m_windowSize = {winConst.WIDTH, winConst.HEIGHT};
+    m_window.create(sf :: VideoMode(winConst.WIDTH, winConst.HEIGHT), winConst.TITLE, sf :: Style :: Titlebar | sf::Style::Close);
+    m_window.setFramerateLimit(winConst.FRAMERATE);
+}
+
+void MainWindow::pollEvent(sf::Event &event)
+{
+    m_window.pollEvent(event);
 }
 
 MainWindow::~MainWindow()
@@ -27,6 +32,7 @@ void MainWindow::update()
         {
             m_window.close();
         }
+        m_UIboard->handeInput(event);
     }
 }
 
@@ -40,9 +46,9 @@ bool MainWindow::isOpen() const
     return m_window.isOpen();
 }
 
-void MainWindow::draw(const sf::Drawable &elem)
+void MainWindow::draw()
 {
-    m_window.draw(elem);
+    m_window.draw(*m_UIboard);
 }
 
 const sf::Vector2u &MainWindow::getwindowSize() const

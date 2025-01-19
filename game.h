@@ -2,7 +2,7 @@
 #define GAME_H
 
 #include "UI/mainwindow.h"
-#include "UI/board.h"
+#include "UI/UIboard.h"
 #include "logicboard.h"
 
 class Game
@@ -18,9 +18,9 @@ public:
     bool isEnded();
 
 private:
-    MainWindow m_window;
-    std :: unique_ptr<Board> m_UIboard;
-    std :: unique_ptr<LogicBoard> m_logicBord;
+    std :: unique_ptr<MainWindow> m_window;
+    std :: unique_ptr<UIBoard> m_UIboard;
+    std :: unique_ptr<LogicBoard> m_logicBoard;
 };
 
 #endif // GAME_H

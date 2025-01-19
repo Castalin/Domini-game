@@ -14,12 +14,14 @@ CONFIG(release, debug|release): LIBS += -lsfml-audio -lsfml-graphics -lsfml-syst
 
 
 SOURCES += \
-        UI/board.cpp \
+        UI/UIboard.cpp \
         UI/mainwindow.cpp \
         UI/sprite.cpp \
         figure.cpp \
         figurefactory.cpp \
         game.cpp \
+        abstarct/casualboard.cpp \
+        abstarct/i_checkcell.cpp \
         logicboard.cpp \
         main.cpp
 
@@ -30,7 +32,7 @@ DISTFILES += \
     UI/photos/white_pawn.png
 
 HEADERS += \
-    UI/board.h \
+    UI/UIboard.h \
     UI/boardconstants.h \
     UI/mainwindow.h \
     UI/sprite.h \
@@ -38,4 +40,6 @@ HEADERS += \
     figure.h \
     figurefactory.h \
     game.h \
+    abstarct//casualboard.h \
+    abstarct/i_checkcell.h \
     logicboard.h

@@ -12,6 +12,7 @@ public:
     void loadFromFile(const std :: string &filePath);
     void loadFromImage(const sf :: Image &image);
     void centrelizeOrigin();
+    void decentrelizeOrigin();
 
 private:
     sf :: Texture m_sfTexture;
