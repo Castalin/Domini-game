@@ -21,12 +21,12 @@ void Game :: handleInput()
 
 void Game :: update()
 {
-
     if (m_basicAI->getplayerType() == m_logicBoard->getTurn())
     {
         m_basicAI->findOptimal();
         m_UIboard->selectFigure(m_basicAI->getoptimalFig());
         m_UIboard->tryToMoveFigure(m_basicAI->getoptimalCell());
+        m_UIboard->checkGameState();
     }
 }
 

@@ -25,7 +25,7 @@ public:
     Vector2i getoptimalCell() const;
 
 private:
-    vector<vector<float>> m_points;
+    vector<vector<int>> m_points;
     const vector< vector<char>> *m_gameBoard;
     const vector<std :: shared_ptr<Figure>> *m_figures;
     playerType m_playerType;
@@ -38,9 +38,9 @@ private:
     const int m_columns;
 
     void findPossibleMoves(const Figure &fig);
-    void findOptimalCell(const Figure &fig, float &diff);
+    void findOptimalCell(const Figure &fig, int &diff);
 
-    inline float countDiff(const Vector2i &newPos, const Vector2i &pos);
+    inline int countDiff(const Vector2i &newPos, const Vector2i &pos);
 };
 
 #endif // AI_H
