@@ -5,7 +5,7 @@
 #include "winconstants.h"
 #include "UIboard.h"
 #include "menu.h"
-#include "unordered_map"
+#include <unordered_map>
 #include "endgame.h"
 
 class MainWindow
@@ -18,7 +18,7 @@ public:
     MainWindow& operator= (const MainWindow &window) = delete;
 
     void clear();
-    void update();
+    void handleInput();
     void display();
 
     bool isOpen() const;

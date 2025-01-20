@@ -1,8 +1,8 @@
 #ifndef UIBOARD_H
 #define UIBOARD_H
 #include "sprite.h"
-#include "../Domini-game/figurefactory.h"
-#include "../Domini-game/logicboard.h"
+#include "logic/figurefactory.h"
+#include "logic/logicboard.h"
 #include "winconstants.h"
 #include "SFML/Graphics/Text.hpp"
 #include "abstarct/a_window.h"

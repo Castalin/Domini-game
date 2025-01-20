@@ -3,8 +3,8 @@
 
 #include "UI/mainwindow.h"
 #include "UI/UIboard.h"
-#include "logicboard.h"
-#include "ai.h"
+#include "logic/logicboard.h"
+#include "logic/ai.h"
 
 class Game
 {

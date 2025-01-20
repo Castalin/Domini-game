@@ -33,7 +33,7 @@ void MainWindow::clear()
     m_rendWindow.clear();
 }
 
-void MainWindow::update()
+void MainWindow::handleInput()
 {
     sf :: Event event;
     while (m_rendWindow.pollEvent(event))

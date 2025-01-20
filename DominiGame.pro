@@ -23,13 +23,13 @@ SOURCES += \
         abstarct/i_findoptimal.cpp \
         abstarct/i_handleinput.cpp \
         abstarct/i_window.cpp \
-        ai.cpp \
-        figure.cpp \
-        figurefactory.cpp \
-        game.cpp \
+        logic/ai.cpp \
+        logic/figure.cpp \
+        logic/figurefactory.cpp \
+        logic/game.cpp \
         abstarct/casualboard.cpp \
         abstarct/i_checkcell.cpp \
-        logicboard.cpp \
+        logic/logicboard.cpp \
         main.cpp
 
 DISTFILES += \
@@ -50,10 +50,10 @@ HEADERS += \
     abstarct/i_findoptimal.h \
     abstarct/i_handleinput.h \
     abstarct/i_window.h \
-    ai.h \
-    figure.h \
-    figurefactory.h \
-    game.h \
+    logic/ai.h \
+    logic/figure.h \
+    logic/figurefactory.h \
+    logic/game.h \
     abstarct//casualboard.h \
     abstarct/i_checkcell.h \
-    logicboard.h
+    logic/logicboard.h

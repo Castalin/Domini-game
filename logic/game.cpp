@@ -16,12 +16,12 @@ Game::~Game()
 
 void Game :: handleInput()
 {
-
+    m_window->handleInput();
 }
 
 void Game :: update()
 {
-    m_window->update();
+
     if (m_basicAI->getplayerType() == m_logicBoard->getTurn())
     {
         m_basicAI->findOptimal();
