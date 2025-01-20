@@ -5,7 +5,7 @@ int main()
 
     Game game;
 
-    while (!game.isEnded())
+    while (game.isRunning())
     {
         game.handleInput();
         game.update();

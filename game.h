@@ -15,7 +15,7 @@ public:
     void update();
     void render();
 
-    bool isEnded();
+    bool isRunning();
 
 private:
     std :: unique_ptr<MainWindow> m_window;

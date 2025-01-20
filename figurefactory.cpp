@@ -3,7 +3,7 @@
 
 FigureFactory::FigureFactory()
 {
-    std :: string pathToTexture = "D:\\stud\\ProgaForQt\\dominiGame\\DominiGame\\Domini-game\\UI\\photos\\";;
+    std :: string pathToTexture = "D:\\stud\\ProgaForQt\\dominiGame\\DominiGame\\Domini-game\\UI\\other\\";;
     std :: string pathPostfix = "_pawn.png";
     m_mapTextures[Colors :: WHITE] = sf :: Texture();
     m_mapTextures[Colors :: WHITE].loadFromFile(pathToTexture + "white" + pathPostfix);

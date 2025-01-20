@@ -2,7 +2,6 @@
 
 Game :: Game()
 {
-
     m_logicBoard = std :: make_unique<LogicBoard>();
     WinConstants winConst;
     m_UIboard = std :: make_unique<UIBoard>(m_logicBoard.get(), winConst);
@@ -22,6 +21,7 @@ void Game :: handleInput()
 void Game :: update()
 {
     m_window->update();
+    m_logicBoard->checkWinner();
 }
 
 void Game :: render()
@@ -31,7 +31,7 @@ void Game :: render()
     m_window->display();
 }
 
-bool Game :: isEnded()
+bool Game :: isRunning()
 {
-    return !m_window->isOpen();
+    return m_window->isOpen();
 }

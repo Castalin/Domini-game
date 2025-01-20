@@ -4,47 +4,56 @@
 #include "../Domini-game/figurefactory.h"
 #include "../Domini-game/logicboard.h"
 #include "winconstants.h"
-#include "SFML/Window.hpp"
+#include "SFML/Graphics/Text.hpp"
+#include "abstarct/a_window.h"
 
+class EndGame;
 
-class UIBoard : public CasualBoard, public sf::Drawable
+class UIBoard : public CasualBoard, public A_window
 {
 public:
     UIBoard(LogicBoard * logicBoard, const WinConstants &winConst);
     ~UIBoard();
 
     void reset();
-    void handeInput(sf :: Event &event);
+    inline bool isFigSelected();
     void selectFigure(const sf :: Vector2i &indexes);
-    void tryToMoveFigure(const sf :: Vector2i &newIndexes);
+    bool tryToMoveFigure(const sf :: Vector2i &newIndexes);
+    void checkGameState();
+
+    void setEndGameWindow(EndGame *endGame);
+
+    void handleInput(sf::Event &event) override;
 
 protected:
     void draw(sf::RenderTarget &target, sf::RenderStates states) const override;
 
 private:
     const sf :: Vector2u m_windowSize;
+    LogicBoard *m_logicBoard;
+    EndGame *m_endGame;
 
     Sprite m_spriteBound;
     Sprite m_spriteBoard;
+    sf :: Text m_refreshText;
+    sf :: Font m_font;
 
     float m_widthOfCell;
     float m_heightOfCell;
-    std :: pair<int, int> m_widthBorder;
-    std :: pair<int, int> m_heightBorder;
     sf :: Vector2f m_startCell;
 
     Figure *m_selectedFigure;
 
-    LogicBoard *m_logicBoard;
     using Figures = std :: vector<std :: shared_ptr<Figure>>;
     std :: vector<Figures> m_figures;
     std :: unique_ptr<FigureFactory> m_factory;
 
+
+
     void createFigures(const LogicBoard :: Players &player, const Colors &color, const int &count);
     Figure* findFigure(const sf :: Vector2i &indexes);
-    inline bool isFigSelected();
-    void moveFigure(const sf :: Vector2i &newIndexes);
-
+    inline void unselectFig();
+    bool moveFigure(const sf :: Vector2i &newIndexes);
 };
 
 #endif // UIBOARD_H

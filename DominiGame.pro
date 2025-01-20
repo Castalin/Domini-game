@@ -15,8 +15,13 @@ CONFIG(release, debug|release): LIBS += -lsfml-audio -lsfml-graphics -lsfml-syst
 
 SOURCES += \
         UI/UIboard.cpp \
+        UI/endgame.cpp \
         UI/mainwindow.cpp \
+        UI/menu.cpp \
         UI/sprite.cpp \
+        abstarct/a_window.cpp \
+        abstarct/i_handleinput.cpp \
+        abstarct/i_window.cpp \
         figure.cpp \
         figurefactory.cpp \
         game.cpp \
@@ -26,17 +31,22 @@ SOURCES += \
         main.cpp
 
 DISTFILES += \
-    UI/photos/black_pawn.png \
-    UI/photos/board.png \
-    UI/photos/bound.jpg \
-    UI/photos/white_pawn.png
+    UI/other/Verdana.ttf \
+    UI/other/black_pawn.png \
+    UI/other/board.png \
+    UI/other/bound.jpg \
+    UI/other/white_pawn.png
 
 HEADERS += \
     UI/UIboard.h \
-    UI/boardconstants.h \
+    UI/endgame.h \
     UI/mainwindow.h \
+    UI/menu.h \
     UI/sprite.h \
     UI/winconstants.h \
+    abstarct/a_window.h \
+    abstarct/i_handleinput.h \
+    abstarct/i_window.h \
     figure.h \
     figurefactory.h \
     game.h \
