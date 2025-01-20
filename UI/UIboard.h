@@ -6,6 +6,7 @@
 #include "winconstants.h"
 #include "SFML/Graphics/Text.hpp"
 #include "abstarct/a_window.h"
+#include "SFML/Graphics/CircleShape.hpp"
 
 class EndGame;
 
@@ -50,11 +51,14 @@ private:
     std :: vector<Figures> m_figures;
     std :: unique_ptr<FigureFactory> m_factory;
 
-
     void createFigures(const LogicBoard :: Players &player, const Colors &color, const int &count);
     Figure* findFigure(const sf :: Vector2i &indexes);
-    inline void unselectFig();
+    void unselectFig();
     bool moveFigure(const sf :: Vector2i &newIndexes);
+
+    std :: vector<sf :: CircleShape> m_possibleMovesPoints;
+    void createPossibleMovePoint(const int &x, const int &y);
+    void calculatePossibleMoves();
 };
 
 #endif // UIBOARD_H

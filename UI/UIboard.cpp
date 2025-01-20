@@ -19,6 +19,7 @@ UIBoard :: UIBoard(LogicBoard * logicBoard, const WinConstants &winConst)
     m_startCell.y += m_heightOfCell * 0.5f;
 
     m_font.loadFromFile("..\\Domini-game\\UI\\other\\Verdana.ttf");
+
     m_refreshText.setString("To restart press F5");
     m_refreshText.setFont(m_font);
     m_refreshText.setCharacterSize(25u);
@@ -66,6 +67,7 @@ bool UIBoard::isFigSelected()
 void UIBoard::unselectFig()
 {
     m_selectedFigure = nullptr;
+    m_possibleMovesPoints.clear();
 }
 
 bool UIBoard::moveFigure(const sf::Vector2i &newIndexes)
@@ -79,6 +81,35 @@ bool UIBoard::moveFigure(const sf::Vector2i &newIndexes)
     }
     return false;
 
+}
+
+void UIBoard::createPossibleMovePoint(const int &x, const int &y)
+{
+    sf :: CircleShape point(m_widthOfCell / 10);
+    point.setFillColor(sf :: Color(0, 0, 0));
+    point.setOutlineThickness(point.getRadius() / 10);
+    point.setOutlineColor(sf :: Color(224, 224, 224));
+    point.setPosition(x * m_widthOfCell + m_startCell.x, y * m_heightOfCell + m_startCell.y);
+    m_possibleMovesPoints.push_back(point);
+}
+
+void UIBoard::calculatePossibleMoves()
+{
+    if (m_selectedFigure == nullptr)
+    {
+        return ;
+    }
+
+    for (int x{0}; x < m_rows; ++x)
+    {
+        for (int y{0}; y < m_columns; ++y)
+        {
+            if (m_selectedFigure->checkCell({x, y}) == true && m_logicBoard->checkEmptyCell({x, y}))
+            {
+                createPossibleMovePoint(x, y);
+            }
+        }
+    }
 }
 
 void UIBoard::reset()
@@ -175,6 +206,7 @@ void UIBoard::handleInput(sf::Event &event)
                 else
                 {
                     selectFigure(indexes);
+                    calculatePossibleMoves();
                 }
             }
             else
@@ -195,6 +227,11 @@ void UIBoard::draw(sf::RenderTarget &target, sf::RenderStates states) const
     target.draw(m_spriteBound);
     target.draw(m_spriteBoard);
     target.draw(m_refreshText);
+
+    for (auto &point : m_possibleMovesPoints)
+    {
+        target.draw(point);
+    }
 
     for (auto &vec : m_figures)
     {

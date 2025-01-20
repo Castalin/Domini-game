@@ -3,7 +3,7 @@
 Menu::Menu(sf::RenderWindow *window)
     :m_window{window}
 {
-    m_font.loadFromFile("..\\Domini-game\\UI\\other\\Verdana.ttf");
+    m_font.loadFromFile("..\\Domini-game\\UI\\other\\Verdana.ttf"); /**/
     m_startText.setString("Start");
     m_startText.setFont(m_font);
     m_startText.setCharacterSize(50);
