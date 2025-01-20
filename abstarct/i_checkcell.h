@@ -8,7 +8,7 @@ class I_checkCell
 public:
     I_checkCell();
     virtual ~I_checkCell();
-    virtual bool checkCell(const sf :: Vector2i &newIndexes) = 0;
+    virtual bool checkCell(const sf :: Vector2i &newIndexes) const = 0;
 };
 
 #endif // I_CHECKCELL_H

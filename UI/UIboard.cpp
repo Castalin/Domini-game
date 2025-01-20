@@ -185,6 +185,11 @@ void UIBoard::handleInput(sf::Event &event)
     }
 }
 
+const std::vector<std::shared_ptr<Figure> > *UIBoard::getPlayerFigure(const Players &player)
+{
+    return &m_figures[player];
+}
+
 void UIBoard::draw(sf::RenderTarget &target, sf::RenderStates states) const
 {
     target.draw(m_spriteBound);

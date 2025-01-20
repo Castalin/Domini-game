@@ -3,10 +3,8 @@
 LogicBoard::LogicBoard()
     : CasualBoard()
 {
-
-    m_gameBoard = std :: vector<std :: vector<char>>(m_rows, std :: vector<char>(m_columns, ','));
+    m_gameBoard = vector< vector<char>>(m_rows, vector<char>(m_columns, ','));
     reset();
-
 }
 
 LogicBoard::~LogicBoard()
@@ -32,7 +30,7 @@ void LogicBoard::reset()
     m_madeMove = false;
 }
 
-bool LogicBoard::checkSelectable(const sf::Vector2i &indexes)
+bool LogicBoard::checkSelectable(const Vector2i &indexes)
 {
     if (m_turn == PLAYER_1)
     {
@@ -42,12 +40,12 @@ bool LogicBoard::checkSelectable(const sf::Vector2i &indexes)
     return m_gameBoard[indexes.x][indexes.y] == '2';
 }
 
-bool LogicBoard::checkEmptyCell(const sf::Vector2i &indexes)
+bool LogicBoard::checkEmptyCell(const Vector2i &indexes)
 {
     return m_gameBoard[indexes.x][indexes.y] == ',';
 }
 
-void LogicBoard::moveFigure(const sf::Vector2i &oldPos, const sf::Vector2i &newPos)
+void LogicBoard::moveFigure(const Vector2i &oldPos, const Vector2i &newPos)
 {
     std :: swap(m_gameBoard[oldPos.x][oldPos.y], m_gameBoard[newPos.x][newPos.y]);
     m_turn = (m_turn == PLAYER_1 ? PLAYER_2 : PLAYER_1);
@@ -90,4 +88,14 @@ bool LogicBoard::checkWinner()
 const std::string& LogicBoard::getMessage()
 {
     return m_message;
+}
+
+const vector<vector<char> > *LogicBoard::getgameBoard() const
+{
+    return &m_gameBoard;
+}
+
+Player LogicBoard::getTurn() const
+{
+    return m_turn;
 }

@@ -6,6 +6,10 @@
 #include <utility>
 #include <string>
 
+using sf :: Vector2i;
+using std :: vector;
+using Player = CasualBoard :: Players;
+
 class LogicBoard : public CasualBoard
 {
 
@@ -14,14 +18,18 @@ public:
     ~LogicBoard();
 
     void reset();
-    bool checkSelectable(const sf :: Vector2i &indexes);
-    bool checkEmptyCell(const sf :: Vector2i &indexes);
-    void moveFigure(const sf :: Vector2i &oldPos, const sf :: Vector2i &newPos);
+    bool checkSelectable(const Vector2i &indexes);
+    bool checkEmptyCell(const Vector2i &indexes);
+    void moveFigure(const Vector2i &oldPos, const Vector2i &newPos);
     bool checkWinner();
     const std :: string& getMessage();
 
+    const vector< vector<char> >* getgameBoard() const;
+    Player getTurn() const;
+
+
 private:
-    std :: vector<std :: vector<char>> m_gameBoard;
+    vector< vector<char>> m_gameBoard;
     Players m_turn;
     bool m_madeMove;
     std :: string m_message;

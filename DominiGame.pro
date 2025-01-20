@@ -20,8 +20,10 @@ SOURCES += \
         UI/menu.cpp \
         UI/sprite.cpp \
         abstarct/a_window.cpp \
+        abstarct/i_findoptimal.cpp \
         abstarct/i_handleinput.cpp \
         abstarct/i_window.cpp \
+        ai.cpp \
         figure.cpp \
         figurefactory.cpp \
         game.cpp \
@@ -45,8 +47,10 @@ HEADERS += \
     UI/sprite.h \
     UI/winconstants.h \
     abstarct/a_window.h \
+    abstarct/i_findoptimal.h \
     abstarct/i_handleinput.h \
     abstarct/i_window.h \
+    ai.h \
     figure.h \
     figurefactory.h \
     game.h \

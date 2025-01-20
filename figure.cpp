@@ -6,7 +6,7 @@ Figure::Figure(Colors color)
 
 }
 
-bool Figure::checkCell(const sf::Vector2i &newIndexes)
+bool Figure::checkCell(const sf::Vector2i &newIndexes) const
 {
     return (abs(m_indexes.x - newIndexes.x) + abs(m_indexes.y - newIndexes.y)) == 1;
 }

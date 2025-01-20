@@ -17,7 +17,7 @@ class Figure : public sf :: Sprite, public I_checkCell
 public:
     Figure(Colors color);
 
-    bool checkCell(const sf::Vector2i &newIndexes) override;
+    bool checkCell(const sf::Vector2i &newIndexes) const override;
 
     void setIndexes(const sf::Vector2i &newIndexes);
     int getindexX() const;

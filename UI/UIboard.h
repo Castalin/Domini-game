@@ -24,6 +24,8 @@ public:
     void setEndGameWindow(EndGame *endGame);
 
     void handleInput(sf::Event &event) override;
+    const std :: vector<std :: shared_ptr<Figure>>* getPlayerFigure(const LogicBoard :: Players &player);
+
 
 protected:
     void draw(sf::RenderTarget &target, sf::RenderStates states) const override;
@@ -47,7 +49,6 @@ private:
     using Figures = std :: vector<std :: shared_ptr<Figure>>;
     std :: vector<Figures> m_figures;
     std :: unique_ptr<FigureFactory> m_factory;
-
 
 
     void createFigures(const LogicBoard :: Players &player, const Colors &color, const int &count);
