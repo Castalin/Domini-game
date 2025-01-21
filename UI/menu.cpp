@@ -1,9 +1,9 @@
 #include "menu.h"
 
-Menu::Menu(sf::RenderWindow *window)
-    :m_window{window}
+Menu::Menu(sf::RenderWindow *window, std::shared_ptr<UIBoard> UIboard)
+    :m_window{window}, m_UIboard{UIboard}
 {
-    m_font.loadFromFile("..\\Domini-game\\UI\\other\\Verdana.ttf"); /**/
+    m_font.loadFromFile("other\\Verdana.ttf"); /*..\\Domini-game\\UI\\*/
     m_startText.setString("Start");
     m_startText.setFont(m_font);
     m_startText.setCharacterSize(50);
@@ -27,6 +27,7 @@ void Menu::handleInput(sf::Event &event)
         {
             if (inArea(m_startText.getGlobalBounds(), event) == true)
             {
+                m_UIboard->reset();
                 *(m_winState.get()) = WinState :: GAME;
             }
             if (inArea(m_quitText.getGlobalBounds(), event) == true)

@@ -2,10 +2,10 @@
 
 Game :: Game()
 {
-    m_logicBoard = std :: make_unique<LogicBoard>();
+    m_logicBoard = std :: make_shared<LogicBoard>();
     WinConstants winConst;
-    m_UIboard = std :: make_unique<UIBoard>(m_logicBoard.get(), winConst);
-    m_window = std :: make_unique<MainWindow>(m_UIboard.get(), winConst);
+    m_UIboard = std :: make_shared<UIBoard>(m_logicBoard, winConst);
+    m_window = std :: make_unique<MainWindow>(m_UIboard, winConst);
     m_basicAI = std :: make_unique<AI>(m_logicBoard->getgameBoard(), m_UIboard->getPlayerFigure(Player :: PLAYER_2), Player :: PLAYER_2);
 }
 

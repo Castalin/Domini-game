@@ -1,6 +1,6 @@
 #include "mainwindow.h"
 
-MainWindow::MainWindow(UIBoard *UIboard, WinConstants &winConst)
+MainWindow::MainWindow(std :: shared_ptr<UIBoard> UIboard, WinConstants &winConst)
     :m_UIboard(UIboard), m_winState{nullptr}
 {
     m_windowSize = {winConst.WIDTH, winConst.HEIGHT};
@@ -10,17 +10,16 @@ MainWindow::MainWindow(UIBoard *UIboard, WinConstants &winConst)
     std :: shared_ptr<WinState> state = std :: make_shared<WinState>(WinState :: MAIN_MENU);
     m_winState = state.get();
 
-    m_menu = std :: make_unique<Menu>(&m_rendWindow);
+    m_menu = std :: make_unique<Menu>(&m_rendWindow, UIboard);
     m_menu->setState(state);
-    m_endGame = std :: make_unique<EndGame>(&m_rendWindow, UIboard);
+    m_endGame = std :: make_shared<EndGame>(&m_rendWindow, UIboard);
     m_endGame->setState(state);
     m_UIboard->setState(state);
-    m_UIboard->setEndGameWindow(m_endGame.get());
+    m_UIboard->setEndGameWindow(m_endGame);
 
     m_stateWindows[WinState :: MAIN_MENU]      = m_menu.get();
-    m_stateWindows[WinState :: GAME]           = m_UIboard;
+    m_stateWindows[WinState :: GAME]           = m_UIboard.get();
     m_stateWindows[WinState :: END_GAME]       = m_endGame.get();
-
 }
 
 MainWindow::~MainWindow()

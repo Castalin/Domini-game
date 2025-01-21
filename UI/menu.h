@@ -3,11 +3,12 @@
 #include "abstarct/a_window.h"
 #include "SFML/Graphics/RenderWindow.hpp"
 #include "SFML/Graphics/Text.hpp"
+#include "UIboard.h"
 
 class Menu : public A_window
 {
 public:
-    Menu(sf :: RenderWindow *window);
+    Menu(sf :: RenderWindow *window, std :: shared_ptr<UIBoard> UIboard);
 
     void handleInput(sf::Event &event) override;
 
@@ -20,8 +21,7 @@ private:
     sf :: Text m_quitText;
     sf :: Font m_font;
 
-    bool checkText(const sf :: FloatRect &rect, const sf :: Event &event);
-
+    std::shared_ptr<UIBoard> m_UIboard;
 };
 
 #endif // MENU_H

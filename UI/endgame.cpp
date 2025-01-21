@@ -1,9 +1,9 @@
 #include "endgame.h"
 
-EndGame::EndGame(sf::RenderWindow *window, UIBoard *UIboard)
+EndGame::EndGame(sf::RenderWindow *window, std::shared_ptr<UIBoard> UIboard)
     :m_window{window}, m_UIboard{UIboard}
 {
-    m_font.loadFromFile("..\\Domini-game\\UI\\other\\Verdana.ttf");
+    m_font.loadFromFile("other\\Verdana.ttf");  /*..\\Domini-game\\UI\\*/
 
     initText(m_message, "", 65u, sf :: Color(128u, 128u, 128u));
     m_message.setPosition(m_window->getSize().x / 2, m_window->getSize().y / 5);

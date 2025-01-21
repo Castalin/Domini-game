@@ -2,12 +2,12 @@
 #include "endgame.h"
 #include "SFML/Graphics/RenderTarget.hpp"
 
-UIBoard :: UIBoard(LogicBoard * logicBoard, const WinConstants &winConst)
+UIBoard :: UIBoard(std::shared_ptr<LogicBoard> logicBoard, const WinConstants &winConst)
     : m_windowSize(sf :: Vector2u{winConst.WIDTH, winConst.HEIGHT}), m_logicBoard(logicBoard)
 {
-    m_spriteBound.loadFromFile("..\\Domini-game\\UI\\other\\bound.jpg");
+    m_spriteBound.loadFromFile("other\\bound.jpg"); /*..\\Domini-game\\UI\\*/
 
-    m_spriteBoard.loadFromFile("..\\Domini-game\\UI\\other\\board.png");
+    m_spriteBoard.loadFromFile("other\\board.png");
     m_spriteBoard.centrelizeOrigin();
     m_spriteBoard.setPosition(m_windowSize.x / 2, m_windowSize.y / 2);
 
@@ -18,7 +18,7 @@ UIBoard :: UIBoard(LogicBoard * logicBoard, const WinConstants &winConst)
     m_startCell.x += m_widthOfCell * 0.5f;
     m_startCell.y += m_heightOfCell * 0.5f;
 
-    m_font.loadFromFile("..\\Domini-game\\UI\\other\\Verdana.ttf");
+    m_font.loadFromFile("other\\Verdana.ttf");
 
     m_refreshText.setString("To restart press F5");
     m_refreshText.setFont(m_font);
@@ -165,7 +165,7 @@ void UIBoard::checkGameState()
     }
 }
 
-void UIBoard::setEndGameWindow(EndGame *endGame)
+void UIBoard::setEndGameWindow(std::shared_ptr<EndGame> endGame)
 {
     m_endGame = endGame;
 }

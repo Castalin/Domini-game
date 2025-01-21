@@ -9,7 +9,7 @@ class UIBoard;
 class EndGame : public A_window
 {
 public:
-    EndGame(sf::RenderWindow *window, UIBoard * UIboard);
+    EndGame(sf::RenderWindow *window, std :: shared_ptr<UIBoard> UIboard);
 
     void handleInput(sf::Event &event) override;
     void setMessage(const std :: string &message);
@@ -20,7 +20,7 @@ private:
     sf :: Text m_message;
     sf :: Font m_font;
 
-    UIBoard *m_UIboard;
+    std :: shared_ptr<UIBoard> m_UIboard;
 
     void centralize(sf::Text &text);
     void initText(sf::Text &text, const std::string &str, const unsigned int &size, const sf::Color &color);
