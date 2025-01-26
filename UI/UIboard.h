@@ -59,6 +59,8 @@ private:
     std :: vector<sf :: CircleShape> m_possibleMovesPoints;
     void createPossibleMovePoint(const int &x, const int &y);
     void calculatePossibleMoves();
+    void setPosition(Figure* fig);
+    bool setNewIndexes(const sf :: Vector2i &newIndexes);
 };
 
 #endif // UIBOARD_H

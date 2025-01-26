@@ -18,7 +18,7 @@ UIBoard :: UIBoard(std::shared_ptr<LogicBoard> logicBoard, const WinConstants &w
     m_startCell.x += m_widthOfCell * 0.5f;
     m_startCell.y += m_heightOfCell * 0.5f;
 
-    m_font.loadFromFile("other\\Verdana.ttf");
+    m_font.loadFromFile("other\\Verdana.ttf"); /**/
 
     m_refreshText.setString("To restart press F5");
     m_refreshText.setFont(m_font);
@@ -72,11 +72,9 @@ void UIBoard::unselectFig()
 
 bool UIBoard::moveFigure(const sf::Vector2i &newIndexes)
 {
-    if (m_selectedFigure->checkCell(newIndexes) == true && m_logicBoard->checkEmptyCell(newIndexes))
+    if (setNewIndexes(newIndexes) == true)
     {
-        m_logicBoard->moveFigure(m_selectedFigure->getIndexes(), newIndexes);
-        m_selectedFigure->setIndexes(newIndexes);
-        m_selectedFigure->setPosition(newIndexes.x * m_widthOfCell + m_startCell.x, newIndexes.y * m_heightOfCell + m_startCell.y);
+        setPosition(m_selectedFigure);
         return true;
     }
     return false;
@@ -95,21 +93,29 @@ void UIBoard::createPossibleMovePoint(const int &x, const int &y)
 
 void UIBoard::calculatePossibleMoves()
 {
-    if (m_selectedFigure == nullptr)
-    {
-        return ;
-    }
+    if (!isFigSelected())
+        return;
 
     for (int x{0}; x < m_rows; ++x)
-    {
         for (int y{0}; y < m_columns; ++y)
-        {
             if (m_selectedFigure->checkCell({x, y}) == true && m_logicBoard->checkEmptyCell({x, y}))
-            {
                 createPossibleMovePoint(x, y);
-            }
-        }
+}
+
+void UIBoard::setPosition(Figure *fig)
+{
+    fig->setPosition(fig->getindexX() * m_widthOfCell + m_startCell.x, fig->getindexY() * m_heightOfCell + m_startCell.y);
+}
+
+bool UIBoard::setNewIndexes(const Vector2i &newIndexes)
+{
+    if (m_selectedFigure->checkCell(newIndexes) == true && m_logicBoard->checkEmptyCell(newIndexes))
+    {
+        m_logicBoard->moveFigure(m_selectedFigure->getIndexes(), newIndexes);
+        m_selectedFigure->setIndexes(newIndexes);
+        return true;
     }
+    return false;
 }
 
 void UIBoard::reset()
@@ -126,12 +132,10 @@ void UIBoard::reset()
     }
 
     for (auto &vec : m_figures)
-    {
         for (auto &fig : vec)
-        {
-            fig->setPosition(fig->getindexX() * m_widthOfCell + m_startCell.x, fig->getindexY() * m_heightOfCell + m_startCell.y);
-        }
-    }
+            setPosition(fig.get());
+
+
     unselectFig();
     m_logicBoard->reset();
 }
@@ -179,6 +183,7 @@ void UIBoard::handleInput(sf::Event &event)
             case sf :: Keyboard :: Escape:
             {
                 *(m_winState.get()) = WinState :: MAIN_MENU;
+                unselectFig();
                 break;
             }
             case sf :: Keyboard :: F5:
@@ -197,20 +202,34 @@ void UIBoard::handleInput(sf::Event &event)
             {
                 auto rect = m_spriteBoard.getGlobalBounds();
                 sf :: Vector2i indexes((event.mouseButton.x - rect.left) / m_widthOfCell, (event.mouseButton.y - rect.top) / m_heightOfCell);
-                if (isFigSelected())
+                selectFigure(indexes);
+                calculatePossibleMoves();
+            }
+        }
+    }
+
+    if (event.type == sf :: Event :: MouseMoved)
+    {
+        if (isFigSelected())
+        {
+            m_selectedFigure->setPosition(event.mouseMove.x, event.mouseMove.y);
+        }
+    }
+
+    if (event.type == sf :: Event :: MouseButtonReleased)
+    {
+        if (event.mouseButton.button == sf :: Mouse :: Left)
+        {
+            if (isFigSelected())
+            {
+                if (inArea(m_spriteBoard.getGlobalBounds(), event) == true)
                 {
-                    moveFigure(indexes);
-                    unselectFig();
+                    auto rect = m_spriteBoard.getGlobalBounds();
+                    sf :: Vector2i indexes((event.mouseButton.x - rect.left) / m_widthOfCell, (event.mouseButton.y - rect.top) / m_heightOfCell);
+                    setNewIndexes(indexes);
                     checkGameState();
                 }
-                else
-                {
-                    selectFigure(indexes);
-                    calculatePossibleMoves();
-                }
-            }
-            else
-            {
+                setPosition(m_selectedFigure);
                 unselectFig();
             }
         }
@@ -229,17 +248,12 @@ void UIBoard::draw(sf::RenderTarget &target, sf::RenderStates states) const
     target.draw(m_refreshText);
 
     for (auto &point : m_possibleMovesPoints)
-    {
         target.draw(point);
-    }
+
 
     for (auto &vec : m_figures)
-    {
         for (auto &fig : vec)
-        {
             target.draw(*fig);
-        }
-    }
 }
 
 UIBoard::~UIBoard()
