@@ -8,7 +8,7 @@
 class Menu : public A_window
 {
 public:
-    Menu(sf :: RenderWindow *window, std :: shared_ptr<UIBoard> UIboard);
+    Menu(sf :: RenderWindow *window, UIBoard* UIboard);
 
     void handleInput(sf::Event &event) override;
 
@@ -21,7 +21,7 @@ private:
     sf :: Text m_quitText;
     sf :: Font m_font;
 
-    std::shared_ptr<UIBoard> m_UIboard;
+    UIBoard* m_UIboard;
 };
 
 #endif // MENU_H

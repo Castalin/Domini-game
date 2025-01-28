@@ -13,7 +13,7 @@ class EndGame;
 class UIBoard : public CasualBoard, public A_window
 {
 public:
-    UIBoard(std :: shared_ptr<LogicBoard> logicBoard, const WinConstants &winConst);
+    UIBoard(LogicBoard* logicBoard, const WinConstants &winConst);
     ~UIBoard();
 
     void reset();
@@ -22,7 +22,7 @@ public:
     bool tryToMoveFigure(const sf :: Vector2i &newIndexes);
     void checkGameState();
 
-    void setEndGameWindow(std :: shared_ptr<EndGame> endGame);
+    void setEndGameWindow(EndGame *endGame);
 
     void handleInput(sf::Event &event) override;
     const std :: vector<std :: shared_ptr<Figure>>* getPlayerFigure(const LogicBoard :: Players &player);
@@ -33,8 +33,8 @@ protected:
 
 private:
     const sf :: Vector2u m_windowSize;
-    std :: shared_ptr<LogicBoard> m_logicBoard;
-    std :: shared_ptr<EndGame> m_endGame;
+    LogicBoard* m_logicBoard;
+    EndGame* m_endGame;
 
     Sprite m_spriteBound;
     Sprite m_spriteBoard;

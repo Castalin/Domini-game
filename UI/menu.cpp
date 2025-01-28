@@ -1,6 +1,6 @@
 #include "menu.h"
 
-Menu::Menu(sf::RenderWindow *window, std::shared_ptr<UIBoard> UIboard)
+Menu::Menu(sf::RenderWindow *window, UIBoard *UIboard)
     :m_window{window}, m_UIboard{UIboard}
 {
     m_font.loadFromFile("other\\Verdana.ttf"); /*..\\Domini-game\\UI\\*/

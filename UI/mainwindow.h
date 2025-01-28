@@ -11,7 +11,7 @@
 class MainWindow
 {
 public:
-    MainWindow(std :: shared_ptr<UIBoard> UIboard, WinConstants &winConst);
+    MainWindow(UIBoard* UIboard, WinConstants &winConst);
     ~MainWindow();
 
     MainWindow(const MainWindow &window) = delete;
@@ -30,10 +30,10 @@ private:
     sf :: RenderWindow m_rendWindow;
     sf :: Vector2u m_windowSize;
 
-    std :: shared_ptr<UIBoard> m_UIboard;
+    UIBoard* m_UIboard;
 
     std :: unique_ptr<Menu> m_menu;
-    std :: shared_ptr<EndGame> m_endGame;
+    std :: unique_ptr<EndGame> m_endGame;
     std :: unordered_map<WinState, I_window*> m_stateWindows;
     const WinState *m_winState;
 

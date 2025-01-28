@@ -1,6 +1,6 @@
 #include "endgame.h"
 
-EndGame::EndGame(sf::RenderWindow *window, std::shared_ptr<UIBoard> UIboard)
+EndGame::EndGame(sf::RenderWindow *window, UIBoard *UIboard)
     :m_window{window}, m_UIboard{UIboard}
 {
     m_font.loadFromFile("other\\Verdana.ttf");  /**/

@@ -2,7 +2,7 @@
 #include "endgame.h"
 #include "SFML/Graphics/RenderTarget.hpp"
 
-UIBoard :: UIBoard(std::shared_ptr<LogicBoard> logicBoard, const WinConstants &winConst)
+UIBoard :: UIBoard(LogicBoard* logicBoard, const WinConstants &winConst)
     : m_windowSize(sf :: Vector2u{winConst.WIDTH, winConst.HEIGHT}), m_logicBoard(logicBoard)
 {
     m_spriteBound.loadFromFile("other\\bound.jpg"); /*..\\Domini-game\\UI\\*/
@@ -169,7 +169,7 @@ void UIBoard::checkGameState()
     }
 }
 
-void UIBoard::setEndGameWindow(std::shared_ptr<EndGame> endGame)
+void UIBoard::setEndGameWindow(EndGame* endGame)
 {
     m_endGame = endGame;
 }
